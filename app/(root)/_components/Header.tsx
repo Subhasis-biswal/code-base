@@ -57,11 +57,11 @@ async function Header() {
             <Link
               href="/snippets"
               className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gray-800/50 
-                hover:bg-blue-500/10 border border-gray-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
+                hover:bg-lime-500/10 border border-gray-800 hover:border-lime-500/50 transition-all duration-300 shadow-lg overflow-hidden"
             >
               <div
-                className="absolute inset-0 bg-gradient-to-r from-blue-500/10 
-                to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute inset-0 bg-gradient-to-r from-lime-500/30 
+                to-green-500/30 opacity-0 group-hover:opacity-100 transition-opacity"
               />
               <Code2 className="w-4 h-4 relative z-10 group-hover:rotate-3 transition-transform" />
               <span
@@ -71,6 +71,33 @@ async function Header() {
                 Snippets
               </span>
             </Link>
+
+
+
+               <Link
+              href="https://codeconnect-by-team-seven.onrender.com/"
+              className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gradient-to-r from-purple-500/30 to-blue-500/30
+                hover:bg-blue-500/10 border border-gray-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
+            >
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-purple-500/50 
+                to-blue-500/50 opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+           
+              <span
+                className="text-sm font-medium relative z-10 group-hover:text-white
+                 transition-colors"
+              ><b>
+               &lt; &gt; </b>Code Connect
+              </span>
+            </Link>
+
+
+
+
+
+
+            
           </nav>
         </div>
 

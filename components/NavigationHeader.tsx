@@ -1,6 +1,6 @@
 import HeaderProfileBtn from "@/app/(root)/_components/HeaderProfileBtn";
 import { SignedOut } from "@clerk/nextjs";
-import { Code2, Sparkles } from "lucide-react";
+import { Code2, Sparkles, Plus } from "lucide-react";
 import Link from "next/link";
 
 function NavigationHeader() {
@@ -35,23 +35,71 @@ function NavigationHeader() {
                 </span>
               </div>
             </Link>
+            
 
             {/* snippets Link */}
             <Link
               href="/snippets"
-              className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gray-800/50 hover:bg-blue-500/10 
-              border border-gray-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
+              className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300  bg-gray-800/50 hover:bg-lime-500/10 
+              border border-gray-800 hover:border-lime-500/50 transition-all duration-300 shadow-lg overflow-hidden"
             >
               <div
-                className="absolute inset-0 bg-gradient-to-r from-blue-500/10 
-              to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute inset-0 bg-gradient-to-r from-lime-500/50 
+              to-green-500/50 opacity-0 group-hover:opacity-100 transition-opacity"
               />
               <Code2 className="w-4 h-4 relative z-10 group-hover:rotate-3 transition-transform" />
               <span className="text-sm font-medium relative z-10 group-hover:text-white transition-colors">
                 Snippets
               </span>
             </Link>
+            <Link
+              href="https://codeconnect-by-team-seven.onrender.com/"
+              className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gradient-to-r from-purple-500/30 to-blue-500/30
+                hover:bg-blue-500/10 border border-gray-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
+            >
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-purple-500/50 
+                to-blue-500/50 opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+           
+              <span
+                className="text-sm font-medium relative z-10 group-hover:text-white
+                 transition-colors"
+              ><b>
+               &lt; &gt; </b>Code Connect
+              </span>
+            </Link>
+
+            <Link href="/" className="flex items-center gap-3 group relative">
+            {/* Logo hover effect */}
+
+            <div
+              className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg opacity-0 
+                group-hover:opacity-100 transition-all duration-500 blur-xl"
+            />
+
+            {/* Logo */}
+            <div
+              className="relative bg-gradient-to-br from-[#1a1a2e] to-[#0a0a0f] p-2 rounded-xl ring-1
+              ring-white/10 group-hover:ring-white/20 transition-all  transform -rotate-0 group-hover:rotate-90 transition-transform duration-500"
+            >
+          <Plus className="size-6 text-white-400" />
+             
+            </div>
+
+            <div className="flex flex-col">
+              <span className="block text-lg font-semibold bg-gradient-to-r from-blue-400 via-blue-300 to-purple-400 text-transparent bg-clip-text">
+            
+              </span>
+              <span className="block text-xs text-blue-400/60 font-medium">
+            
+              </span>
+            </div>
+          </Link>
+
           </div>
+
+          
 
           {/* right rection */}
           <div className="flex items-center gap-4">
