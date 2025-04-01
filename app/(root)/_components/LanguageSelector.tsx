@@ -84,7 +84,7 @@ export default function LanguageSelector({ hasAccess }: LanguageSelectorProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.96 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 mt-2 w-64 bg-[#1e1e2e]/95 backdrop-blur-xl
+            className="absolute top-full left-0 mt-2 w-full min-w-[200px] bg-[#1e1e2e]/95 backdrop-blur-xl
            rounded-xl border border-[#313244] shadow-2xl py-2 z-50"
           >
             <div className="px-3 pb-2 mb-2 border-b border-gray-800/50">
