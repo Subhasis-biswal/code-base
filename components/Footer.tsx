@@ -14,15 +14,16 @@ function Footer() {
 
             <div  className="flex items-center gap-2 text-gray-400 items-center">
               
-            Made with <span>♥</span> by{" "}
-            <a
+          
+            <a 
               href="https://pabitra-sahoo.github.io/Code-Connect-Team/"
               target="_self"
               rel="noopener noreferrer"
+              
             >
-              Team Seven
-            </a>{" "}
-            • <span>CodeConnect</span> © {new Date().getFullYear()}
+                Made with <span>♥</span> by Team Seven • © {new Date().getFullYear()}
+            </a> 
+          
           </div>
 
             </span>

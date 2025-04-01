@@ -35,6 +35,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
     error: null,
     editor: null,
     executionResult: null,
+    wordWrap: false,
 
     getCode: () => get().editor?.getValue() || "",
 
@@ -155,6 +156,8 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
         set({ isRunning: false });
       }
     },
+
+    setWordWrap: (wordWrap) => set({ wordWrap }),
   };
 });
 

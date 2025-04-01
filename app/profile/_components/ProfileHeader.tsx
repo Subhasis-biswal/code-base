@@ -78,11 +78,11 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
 
   return (
     <div
-      className="relative mb-8 bg-gradient-to-br from-[#12121a] to-[#1a1a2e] rounded-2xl p-8 border
+      className="relative mb-8 bg-gradient-to-br from-[#12121a] to-[#1a1a2e] rounded-2xl p-4 sm:p-8 border
      border-gray-800/50 overflow-hidden"
     >
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:32px]" />
-      <div className="relative flex items-center gap-8">
+      <div className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-8">
         <div className="relative group">
           <div
             className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full 
@@ -91,7 +91,7 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
           <img
             src={user.imageUrl}
             alt="Profile"
-            className="w-24 h-24 rounded-full border-4 border-gray-800/50 relative z-10 group-hover:scale-105 transition-transform"
+            className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-gray-800/50 relative z-10 group-hover:scale-105 transition-transform"
           />
           {userData.isPro && (
             <div
@@ -102,16 +102,16 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
             </div>
           )}
         </div>
-        <div>
-          <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-3xl font-bold text-white">{userData.name}</h1>
+        <div className="text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-start gap-3 mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">{userData.name}</h1>
             {userData.isPro && (
               <span className="px-3 py-1 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium">
                 Pro Member
               </span>
             )}
           </div>
-          <p className="text-gray-400 flex items-center gap-2">
+          <p className="text-gray-400 flex items-center justify-center sm:justify-start gap-2">
             <UserIcon className="w-4 h-4" />
             {userData.email}
           </p>
@@ -119,7 +119,7 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
         {STATS.map((stat, index) => (
           <motion.div
             initial={{ opacity: 0, y: 20 }}

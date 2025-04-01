@@ -5,7 +5,7 @@ import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
 import { Editor } from "@monaco-editor/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
+import { RotateCcwIcon, ShareIcon, TypeIcon, WrapText } from "lucide-react";
 import { useClerk } from "@clerk/nextjs";
 import { EditorPanelSkeleton } from "./EditorPanelSkeleton";
 import useMounted from "@/hooks/useMounted";
@@ -14,7 +14,7 @@ import ShareSnippetDialog from "./ShareSnippetDialog";
 function EditorPanel() {
   const clerk = useClerk();
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
-  const { language, theme, fontSize, editor, setFontSize, setEditor } = useCodeEditorStore();
+  const { language, theme, fontSize, editor, setFontSize, setEditor, wordWrap, setWordWrap } = useCodeEditorStore();
 
   const mounted = useMounted();
 
@@ -28,6 +28,33 @@ function EditorPanel() {
     const savedFontSize = localStorage.getItem("editor-font-size");
     if (savedFontSize) setFontSize(parseInt(savedFontSize));
   }, [setFontSize]);
+
+  useEffect(() => {
+    if (editor) {
+      editor.updateOptions({
+        minimap: { enabled: false },
+        fontSize,
+        automaticLayout: true,
+        scrollBeyondLastLine: false,
+        padding: { top: 16, bottom: 16 },
+        renderWhitespace: "selection",
+        fontFamily: '"Fira Code", "Cascadia Code", Consolas, monospace',
+        fontLigatures: true,
+        cursorBlinking: "smooth",
+        smoothScrolling: true,
+        contextmenu: true,
+        renderLineHighlight: "all",
+        lineHeight: 1.6,
+        letterSpacing: 0.5,
+        roundedSelection: true,
+        scrollbar: {
+          verticalScrollbarSize: 8,
+          horizontalScrollbarSize: 8,
+        },
+        wordWrap: wordWrap ? "on" : "off",
+      });
+    }
+  }, [editor, fontSize, wordWrap]);
 
   const handleRefresh = () => {
     const defaultCode = LANGUAGE_CONFIG[language].defaultCode;
@@ -48,37 +75,48 @@ function EditorPanel() {
   if (!mounted) return null;
 
   return (
-    <div className="relative">
-      <div className="relative bg-[#12121a]/90 backdrop-blur rounded-xl border border-white/[0.05] p-6">
+    <div className="relative h-full flex flex-col">
+      <div className="relative bg-[#12121a]/90 backdrop-blur rounded-xl border border-white/[0.05] p-4 sm:p-6 h-full flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#1e1e2e] ring-1 ring-white/5">
               <Image src={"/" + language + ".png"} alt="Logo" width={24} height={24} />
             </div>
             <div>
               <h2 className="text-sm font-medium text-white">Code Editor</h2>
-              <p className="text-xs text-gray-500">Write and execute your code</p>
+              <p className="text-xs text-gray-500">Please sign in to execute your code</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
             {/* Font Size Slider */}
-            <div className="flex items-center gap-3 px-3 py-2 bg-[#1e1e2e] rounded-lg ring-1 ring-white/5">
+            <div className="flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-2 bg-[#1e1e2e] rounded-lg ring-1 ring-white/5">
               <TypeIcon className="size-4 text-gray-400" />
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <input
                   type="range"
                   min="12"
                   max="24"
                   value={fontSize}
                   onChange={(e) => handleFontSizeChange(parseInt(e.target.value))}
-                  className="w-20 h-1 bg-gray-600 rounded-lg cursor-pointer"
+                  className="w-16 sm:w-20 h-1 bg-gray-600 rounded-lg cursor-pointer"
                 />
                 <span className="text-sm font-medium text-gray-400 min-w-[2rem] text-center">
                   {fontSize}
                 </span>
               </div>
             </div>
+
+            {/* Word Wrap Button */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setWordWrap(!wordWrap)}
+              className="p-2 bg-[#1e1e2e] hover:bg-[#2a2a3a] rounded-lg ring-1 ring-white/5 transition-colors"
+              title={wordWrap ? "Disable Word Wrap" : "Enable Word Wrap"}
+            >
+              <WrapText className={`size-4 ${wordWrap ? "text-blue-400" : "text-gray-400"}`} />
+            </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -95,20 +133,20 @@ function EditorPanel() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setIsShareDialogOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-gradient-to-r
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg overflow-hidden bg-gradient-to-r
                from-blue-500 to-blue-600 opacity-90 hover:opacity-100 transition-opacity"
             >
               <ShareIcon className="size-4 text-white" />
-              <span className="text-sm font-medium text-white ">Share</span>
+              <span className="hidden sm:inline text-sm font-medium text-white">Share</span>
             </motion.button>
           </div>
         </div>
 
         {/* Editor  */}
-        <div className="relative group rounded-xl overflow-hidden ring-1 ring-white/[0.05]">
+        <div className="relative group rounded-xl overflow-hidden ring-1 ring-white/[0.05] flex-1 min-h-0">
           {clerk.loaded && (
             <Editor
-              height="600px"
+              height="100%"
               language={LANGUAGE_CONFIG[language].monacoLanguage}
               onChange={handleEditorChange}
               theme={theme}
@@ -134,6 +172,7 @@ function EditorPanel() {
                   verticalScrollbarSize: 8,
                   horizontalScrollbarSize: 8,
                 },
+                wordWrap: wordWrap ? "on" : "off",
               }}
             />
           )}
@@ -145,4 +184,5 @@ function EditorPanel() {
     </div>
   );
 }
+
 export default EditorPanel;

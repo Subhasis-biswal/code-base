@@ -7,7 +7,11 @@ import Image from "next/image";
 import { ChevronDownIcon, Lock, Sparkles } from "lucide-react";
 import useMounted from "@/hooks/useMounted";
 
-function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
+interface LanguageSelectorProps {
+  hasAccess: boolean;
+}
+
+export default function LanguageSelector({ hasAccess }: LanguageSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
   const mounted = useMounted();
 
@@ -87,7 +91,7 @@ function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
               <p className="text-xs font-medium text-gray-400">Select Language</p>
             </div>
 
-            <div className="max-h-[280px] overflow-y-auto overflow-x-hidden">
+            <div className="max-h-[280px] overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-800/50 hover:scrollbar-thumb-gray-600">
               {Object.values(LANGUAGE_CONFIG).map((lang, index) => {
                 const isLocked = !hasAccess && lang.id !== "javascript";
 
@@ -167,4 +171,3 @@ function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
     </div>
   );
 }
-export default LanguageSelector;

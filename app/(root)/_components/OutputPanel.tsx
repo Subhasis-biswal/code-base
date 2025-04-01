@@ -20,7 +20,7 @@ function OutputPanel() {
   };
 
   return (
-    <div className="relative bg-[#181825] rounded-xl p-4 ring-1 ring-gray-800/50">
+    <div className="relative bg-[#181825] rounded-xl p-4 ring-1 ring-gray-800/50 h-full flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
@@ -52,10 +52,10 @@ function OutputPanel() {
       </div>
 
       {/* Output Area */}
-      <div className="relative">
+      <div className="relative flex-1 min-h-0">
         <div
           className="relative bg-[#1e1e2e]/50 backdrop-blur-sm border border-[#313244] 
-        rounded-xl p-4 h-[600px] overflow-auto font-mono text-sm"
+          rounded-xl p-3 sm:p-4 h-full overflow-auto font-mono text-sm"
         >
           {isRunning ? (
             <RunningCodeSkeleton />
