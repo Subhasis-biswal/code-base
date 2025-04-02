@@ -26,7 +26,7 @@ async function Header() {
         bg-[#0a0a0f]/80 backdrop-blur-xl p-4 sm:p-6 mb-4 rounded-lg"
       >
         {/* Logo - Always visible */}
-        <Link href="/" className="flex items-center gap-3 group relative">
+        <Link href="/snippets" className="flex items-center gap-3 group relative">
           <div
             className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg opacity-0 
               group-hover:opacity-100 transition-all duration-500 blur-xl"
@@ -66,7 +66,7 @@ async function Header() {
             </Link>
 
             <Link
-              href="https://codeconnect-psa1.onrender.com/"
+              href="https://codeconnect-psa2.onrender.com/"
               className="relative group flex items-center gap-2 px-4 py-1.5 rounded-lg text-gray-300 bg-gradient-to-r from-purple-500/30 to-blue-500/30
                 hover:bg-blue-500/10 border border-gray-800 hover:border-blue-500/50 transition-all duration-300 shadow-lg overflow-hidden"
             >
